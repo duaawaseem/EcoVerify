@@ -24,7 +24,6 @@ Evaluation covers disclosure detection, precision, recall, F1, exact match, nume
 - Improved coverage was accompanied by false positives and incorrect numerical values.
 - Correctly identifying a disclosure did not necessarily produce the correct value, unit or complete structured output.
 - Source-linked outputs remained vulnerable to parsing errors, fragmented context and ambiguous retrieved passages.
-These findings are specific to the study's models, dataset and experimental configurations. They distinguish technical traceability—being able to inspect a source—from extraction reliability—correctly interpreting what that source reports.
 
 
 
