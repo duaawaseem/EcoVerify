@@ -24,8 +24,3 @@ Evaluation covers disclosure detection, precision, recall, F1, exact match, nume
 - Improved coverage was accompanied by false positives and incorrect numerical values.
 - Correctly identifying a disclosure did not necessarily produce the correct value, unit or complete structured output.
 - Source-linked outputs remained vulnerable to parsing errors, fragmented context and ambiguous retrieved passages.
-
-
-
-A proposed human–AI interaction study would compare passive citation presentation with interfaces that encourage active source verification. It would examine error detection and reliance on AI-generated outputs. This extension has not yet been evaluated.
-d Qwen2.5-1.5B-Instruct.
