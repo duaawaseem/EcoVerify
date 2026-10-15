@@ -72,7 +72,7 @@ Figure 2.c: Error Analysis
 - Findings are configuration-specific. Results reflect the selected models, report corpus, prompts and retrieval setup.
   
 ## Implications and future work
-EcoVerify highlights the gap between traceability and reliability. Grounding outputs in available evidence is a useful foundation for oversight however further validation is needed to establish whether a claims are correct.
+EcoVerify highlights the gap between traceability and reliability. Grounding outputs in available evidence is a useful foundation for oversight however further validation is needed to establish whether claims are correct.
 
 Potential extensions may include:
 - Table-aware parsing and retrieval that preserve numerical context.
