@@ -71,7 +71,7 @@ Figure 2.c: Error Analysis
 - Match-based scores require care. The report identifies that matching negative or “NOT FOUND” outputs can inflate match rates. Excluding these cases or evaluating only positive disclosures was not implemented, so these scores should be interpreted alongside recall and F1.
 - Findings are configuration-specific. Results reflect the selected models, report corpus, prompts and retrieval setup.
   
-## Implications and future work
+## Implications and Future Work
 EcoVerify highlights the gap between traceability and reliability. Grounding outputs in available evidence is a useful foundation for oversight however further validation is needed to establish whether claims are correct.
 
 Potential extensions may include:
