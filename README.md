@@ -43,7 +43,7 @@ Retrieval substantially improved recall and F1 relative to the evaluated prompt-
 - Qwen2.5-1.5B-Instruct: Recall increased from 0.00 to approximately 0.49, and F1 increased from 0.00 to approximately 0.56 with RAG.
 These are disclosure-detection results, rather than measures of fully correct numerical extraction. In the evaluated setup, prompt-based configurations predominantly returned negative predictions, failing to recover positive disclosures.
 
-Figure 1 — model performance comparison
+Figure 1: Model Performance 
 <img width="566" height="313" alt="image" src="https://github.com/user-attachments/assets/6562feae-e9f7-4230-8533-599637b20ea2" />
 
 
@@ -53,15 +53,15 @@ Figure 1 — model performance comparison
 - Identifying a disclosure did not guarantee the correct value, unit or complete structured output.
 - Errors shifted from missed disclosures towards incorrect extraction from retrieved context.
 
-Figure 2.a — confusion matrices
+Figure 2.a: Confusion Matrices
 <img width="385" height="316" alt="image" src="https://github.com/user-attachments/assets/514c3ac9-0813-449a-aa30-09dacaa995b6" />
 
 
-Figure 2.b — structured extraction
+Figure 2.b: Structured Extraction
 <img width="413" height="296" alt="image" src="https://github.com/user-attachments/assets/bde47210-0826-4e28-a2bf-88b0e59c39a0" />
 
 
-Figure 2.c — error analysis
+Figure 2.c: Error Analysis
 <img width="406" height="248" alt="image" src="https://github.com/user-attachments/assets/3e2897a7-1095-46f0-9644-a5177812d67a" />
 
 
