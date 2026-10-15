@@ -5,7 +5,7 @@ The study compares prompt-based and retrieval-augmented configurations of GPT-4o
 
 Key finding: Retrieval improves access to relevant evidence and extraction coverage, but evidence-grounded outputs can still contain incorrect values, units and false positives.
 
-## Why this matters
+## Introduction
 Corporate sustainability reports contain environmental disclosures across narrative text, tables and inconsistent reporting formats. Extracting comparable metrics requires identifying the right disclosure and preserving its numerical value, unit and context.
 EcoVerify examines both whether a model finds a disclosure and whether it extracts it correctly. Source evidence supports verification, but its presence alone does not establish correctness.
 
