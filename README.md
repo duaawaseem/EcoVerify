@@ -1,26 +1,76 @@
-EcoVerify is a research project exploring whether retrieval-augmented generation (RAG) improves the reliability and traceability of environmental metric extraction from long, unstructured corporate reports. Developed as a final-year undergraduate project at Keele University, it compares prompt-based and retrieval-augmented configurations of GPT-4o Mini and Qwen2.5-1.5B-Instruct.
-The key finding was that access to evidence improves extraction coverage but evidence grounding does not guarantee correctness.
+# EcoVerify
+EcoVerify investigates whether retrieval-augmented generation (RAG) improves the reliability and traceability of environmental metric extraction from long, unstructured corporate reports.
 
-# Research question
+The study compares prompt-based and retrieval-augmented configurations of GPT-4o Mini and Qwen2.5-1.5B-Instruct using a corpus of 100 FTSE 100 sustainability reports.
+
+Key finding: Retrieval improves access to relevant evidence and extraction coverage, but evidence-grounded outputs can still contain incorrect values, units and false positives.
+
+## Why this matters
+Corporate sustainability reports contain environmental disclosures across narrative text, tables and inconsistent reporting formats. Extracting comparable metrics requires identifying the right disclosure and preserving its numerical value, unit and context.
+EcoVerify examines both whether a model finds a disclosure and whether it extracts it correctly. Source evidence supports verification, but its presence alone does not establish correctness.
+
+## Research question
 How does retrieval augmentation affect the accuracy, completeness and faithfulness of LLM-based environmental metric extraction?
 Approach
-The study uses a corpus of 100 FTSE 100 sustainability reports and a modular pipeline:
-1. Extract report text from PDFs, using OCR where required.
-2. Segment text into searchable chunks with source metadata.
-3. Combine BM25 lexical retrieval with embedding-based semantic retrieval and FAISS similarity search.
-4. Supply relevant passages to the language model for structured metric extraction.
-5. Present extracted values with supporting source evidence for verification.
+The modular pipeline combines document processing, hybrid retrieval and structured extraction:
+1. Parse reports: Extract text from PDFs, using OCR where required.
+2. Prepare evidence: Segment text into searchable chunks while retaining source metadata.
+3. Retrieve passages: Combine BM25 lexical retrieval with embedding-based semantic retrieval and FAISS similarity search.
+4. Extract metrics: Supply retrieved passages to the language model for structured metric extraction.
+5. Support verification: Present extracted values alongside supporting source evidence.
+
+## Experimental design
+Both GPT-4o Mini and Qwen2.5-1.5B-Instruct were evaluated in two configurations:
+- Prompt-based: Baseline extraction without retrieved report context.
+- Retrieval-augmented: Extraction using relevant passages retrieved from the reports.
+The comparison evaluates the configurations used in this study; it does not establish the performance of every possible prompting or retrieval strategy.
+
+## Evaluation
+- Disclosure detection: Precision, recall and F1 measure recovered disclosures, missed disclosures and false positives.
+- Structured extraction: Exact match, numeric match and unit match assess the correctness of extracted values and measurement context.
+- Evidence grounding: Faithfulness assesses whether outputs are supported by retrieved evidence.
+- Retrieval quality: Hit rate and mean reciprocal rank assess whether relevant evidence is retrieved and ranked highly.
+- Efficiency: Latency measures processing time.
+
+## Results
+Disclosure detection
+Retrieval substantially improved recall and F1 relative to the evaluated prompt-based configurations. The report gives the following approximate results:
+- GPT-4o Mini: Recall increased from 0.00 to approximately 0.70, and F1 increased from 0.00 to approximately 0.70 with RAG.
+- Qwen2.5-1.5B-Instruct: Recall increased from 0.00 to approximately 0.49, and F1 increased from 0.00 to approximately 0.56 with RAG.
+These are disclosure-detection results, rather than measures of fully correct numerical extraction. In the evaluated setup, prompt-based configurations predominantly returned negative predictions, failing to recover positive disclosures.
+
+Figure 1 — model performance comparison
+<img width="566" height="313" alt="image" src="https://github.com/user-attachments/assets/6562feae-e9f7-4230-8533-599637b20ea2" />
 
 
-# Evaluation
-Model	Prompt-based	Retrieval-augmented
-GPT-4o Mini	Baseline extraction	Extraction using retrieved report context
-Qwen2.5-1.5B-Instruct	Baseline extraction	Extraction using retrieved report context
+## Error Trade-offs
+- RAG improved recall and output faithfulness, reducing missed disclosures.
+- Greater coverage was accompanied by false positives and incorrect numerical values.
+- Identifying a disclosure did not guarantee the correct value, unit or complete structured output.
+- Errors shifted from missed disclosures towards incorrect extraction from retrieved context.
 
-Evaluation covers disclosure detection, precision, recall, F1, exact match, numeric match, unit match, faithfulness, retrieval hit rate, mean reciprocal rank and latency.
+Figure 2.a — confusion matrices
+<img width="385" height="316" alt="image" src="https://github.com/user-attachments/assets/514c3ac9-0813-449a-aa30-09dacaa995b6" />
 
-# Results
-- Retrieval improved recall and output faithfulness relative to the evaluated prompt-based configurations.
-- Improved coverage was accompanied by false positives and incorrect numerical values.
-- Correctly identifying a disclosure did not necessarily produce the correct value, unit or complete structured output.
-- Source-linked outputs remained vulnerable to parsing errors, fragmented context and ambiguous retrieved passages.
+
+Figure 2.b — structured extraction
+<img width="413" height="296" alt="image" src="https://github.com/user-attachments/assets/bde47210-0826-4e28-a2bf-88b0e59c39a0" />
+
+
+Figure 2.c — error analysis
+<img width="406" height="248" alt="image" src="https://github.com/user-attachments/assets/3e2897a7-1095-46f0-9644-a5177812d67a" />
+
+
+## Limitations
+- Retrieval quality constrains extraction. Partially relevant passages, fragmented context and PDF parsing errors can propagate into generated outputs.
+- Grounding and correctness are distinct. An answer may be supported by a retrieved passage while misinterpreting its value, unit or reporting context.
+- Match-based scores require care. The report identifies that matching negative or “NOT FOUND” outputs can inflate match rates. Excluding these cases or evaluating only positive disclosures was not implemented, so these scores should be interpreted alongside recall and F1.
+- Findings are configuration-specific. Results reflect the selected models, report corpus, prompts and retrieval setup.
+Implications and future work
+EcoVerify highlights the distinction between technical traceability and extraction reliability. Making evidence available is a useful foundation for oversight; further validation is needed to establish whether a claim is correct.
+Potential extensions include:
+- Table-aware parsing and retrieval that preserve numerical context.
+- Validation of values, units and reporting periods before presenting an extraction.
+- Evaluation restricted to positive disclosures to clarify structured extraction performance.
+- A human–AI interaction study testing whether interfaces that encourage active source verification improve error detection compared with passive citations.
+
