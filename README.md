@@ -11,6 +11,7 @@ EcoVerify examines both whether a model finds a disclosure and whether it extrac
 
 ## Research Aims
 • To design and evaluate a transparent AI system capable of extracting verifiable environmental performance metrics from corporate sustainability reports using Llama-3.
+
 • To enhance model transparency by ensuring every extracted metric is traceable to its
 original textual evidence
 
@@ -71,8 +72,9 @@ Figure 2.c — error analysis
 - Findings are configuration-specific. Results reflect the selected models, report corpus, prompts and retrieval setup.
   
 ## Implications and future work
-EcoVerify highlights the distinction between technical traceability and extraction reliability. Making evidence available is a useful foundation for oversight; further validation is needed to establish whether a claim is correct.
-Potential extensions include:
+EcoVerify highlights the gap between traceability and reliability. Grounding outputs in available evidence is a useful foundation for oversight however further validation is needed to establish whether a claims are correct.
+
+Potential extensions may include:
 - Table-aware parsing and retrieval that preserve numerical context.
 - Validation of values, units and reporting periods before presenting an extraction.
 - Evaluation restricted to positive disclosures to clarify structured extraction performance.
