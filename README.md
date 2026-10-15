@@ -1,18 +1,21 @@
 # EcoVerify
-EcoVerify investigates whether retrieval-augmented generation (RAG) improves the reliability and traceability of environmental metric extraction from long, unstructured corporate reports.
+EcoVerify investigates whether retrieval-augmented generation (RAG) can improve the reliability and traceability of environmental metric extraction from long, unstructured corporate reports.
 
 The study compares prompt-based and retrieval-augmented configurations of GPT-4o Mini and Qwen2.5-1.5B-Instruct using a corpus of 100 FTSE 100 sustainability reports.
 
-Key finding: Retrieval improves access to relevant evidence and extraction coverage, but evidence-grounded outputs can still contain incorrect values, units and false positives.
+It was found that retrieval can improve access to relevant evidence and extraction coverage but evidence-grounded outputs may still hold incorrect values, units and false positives.
 
 ## Introduction
 Corporate sustainability reports contain environmental disclosures across narrative text, tables and inconsistent reporting formats. Extracting comparable metrics requires identifying the right disclosure and preserving its numerical value, unit and context.
-EcoVerify examines both whether a model finds a disclosure and whether it extracts it correctly. Source evidence supports verification, but its presence alone does not establish correctness.
+EcoVerify examines both whether a model finds a disclosure and whether it extracts it correctly. Source evidence supports verification, but its presence alone does not ensure accuracy.
 
-## Research question
-How does retrieval augmentation affect the accuracy, completeness and faithfulness of LLM-based environmental metric extraction?
-Approach
-The modular pipeline combines document processing, hybrid retrieval and structured extraction:
+## Research Aims
+• To design and evaluate a transparent AI system capable of extracting verifiable environmental performance metrics from corporate sustainability reports using Llama-3.
+• To enhance model transparency by ensuring every extracted metric is traceable to its
+original textual evidence
+
+### Approach
+The pipeline combines document processing, hybrid retrieval and structured extraction:
 1. Parse reports: Extract text from PDFs, using OCR where required.
 2. Prepare evidence: Segment text into searchable chunks while retaining source metadata.
 3. Retrieve passages: Combine BM25 lexical retrieval with embedding-based semantic retrieval and FAISS similarity search.
@@ -66,7 +69,8 @@ Figure 2.c — error analysis
 - Grounding and correctness are distinct. An answer may be supported by a retrieved passage while misinterpreting its value, unit or reporting context.
 - Match-based scores require care. The report identifies that matching negative or “NOT FOUND” outputs can inflate match rates. Excluding these cases or evaluating only positive disclosures was not implemented, so these scores should be interpreted alongside recall and F1.
 - Findings are configuration-specific. Results reflect the selected models, report corpus, prompts and retrieval setup.
-Implications and future work
+  
+## Implications and future work
 EcoVerify highlights the distinction between technical traceability and extraction reliability. Making evidence available is a useful foundation for oversight; further validation is needed to establish whether a claim is correct.
 Potential extensions include:
 - Table-aware parsing and retrieval that preserve numerical context.
